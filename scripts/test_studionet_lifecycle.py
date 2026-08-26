@@ -1,4 +1,4 @@
-"""Studionet two-wallet lifecycle runner using genlayer_py."""
+"""Studionet lifecycle runner using genlayer_py."""
 import json, os, sys, time
 from genlayer_py import create_account, create_client
 from genlayer_py.chains import studionet

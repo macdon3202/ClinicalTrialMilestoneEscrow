@@ -35,7 +35,7 @@ The contract was manually deployed and exercised on GenLayer Studionet
 0x65629134FE9cc5f6BE2C8798467f5D1012e39634
 ```
 
-The verified lifecycle used two funded test wallets and `0.01 GEN` escrow:
+The verified Studionet run used `0.01 GEN` escrow:
 
 ```text
 create_trial      0x7eb161f71bdbc3c574ed8dd9f4f9cfd3dbe6bfbdcec0406765e479a84a7576bc

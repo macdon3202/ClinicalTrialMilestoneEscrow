@@ -25,7 +25,7 @@ def _addr(value):
     return getattr(value, "as_hex", str(value))
 
 
-def test_two_role_lifecycle_and_wrong_value(direct_vm, direct_deploy, direct_owner, direct_alice):
+def test_role_lifecycle_and_wrong_value(direct_vm, direct_deploy, direct_owner, direct_alice):
     direct_vm.sender = direct_owner
     contract = direct_deploy(CONTRACT_PATH)
     direct_vm.sender = direct_owner
