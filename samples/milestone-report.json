@@ -1,0 +1,11 @@
+{
+  "trial_key": "oncology-phase-ii-demo",
+  "recipient": "0xf7498AE4cade4226c11fc38E1AddF1A7Ec453E93",
+  "milestone": "interim-safety-review",
+  "phase": "PHASE_II",
+  "sample_size": 120,
+  "inclusion_exclusion_compliant": true,
+  "adverse_events": {"serious": 1, "total": 4},
+  "safety_threshold": "within_protocol",
+  "anonymization": "verified"
+}

@@ -1,0 +1,12 @@
+{
+  "status": "NOT_RUN",
+  "reason": "Manual Studionet deployment and funded-wallet execution are required.",
+  "network": "studionet",
+  "chain_id": 61999,
+  "contract_address": null,
+  "contract_class": "ClinicalTrialMilestoneEscrow",
+  "commit_sha": null,
+  "sdk_version": null,
+  "runner_version": null,
+  "scenarios": []
+}
