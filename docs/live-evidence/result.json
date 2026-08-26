@@ -1,12 +1,19 @@
 {
-  "status": "NOT_RUN",
-  "reason": "Manual Studionet deployment and funded-wallet execution are required.",
+  "status": "PARTIALLY_VERIFIED",
+  "reason": "Manual Studionet lifecycle completed through release; independent balance-delta evidence is not recorded in this file.",
   "network": "studionet",
   "chain_id": 61999,
-  "contract_address": null,
+  "contract_address": "0x65629134FE9cc5f6BE2C8798467f5D1012e39634",
   "contract_class": "ClinicalTrialMilestoneEscrow",
   "commit_sha": null,
   "sdk_version": null,
   "runner_version": null,
-  "scenarios": []
+  "scenarios": [
+    {"name": "create_trial", "tx": "0x7eb161f71bdbc3c574ed8dd9f4f9cfd3dbe6bfbdcec0406765e479a84a7576bc", "status": "FINALIZED", "consensus": "MAJORITY_AGREE"},
+    {"name": "add_milestone", "tx": "0x383b58de9a08dbdbb6af67de03662c0338ee5412689129b71c522fc7b83da825", "status": "FINALIZED", "consensus": "MAJORITY_AGREE"},
+    {"name": "fund_milestone", "tx": "0xa52036a2a7fcbc603b43e183c7cc8e48f5e6fc5e5403d6b0657c17d487ab712f", "status": "FINALIZED", "consensus": "MAJORITY_AGREE", "attached_value_wei": "10000000000000000"},
+    {"name": "submit_report", "tx": "0x04629e1f367ca811554653523d7b2cbbc76ae0ae1210b79c59e3f58202893cef", "status": "FINALIZED", "consensus": "MAJORITY_AGREE"},
+    {"name": "validate_report", "tx": "0x5fb367617a14cd549d8313f798f664d14b6c0d9af968cdee1cf338a4a79ed1e6", "status": "FINALIZED", "consensus": "MAJORITY_AGREE", "readback": "APPROVED"},
+    {"name": "release_milestone", "tx": "0x1b3f323fc8f910c7f92b905d658510c61e72fe1681ab680f2967d2c2f97ce2bb", "status": "FINALIZED", "consensus": "MAJORITY_AGREE", "readback": "RELEASED"}
+  ]
 }
