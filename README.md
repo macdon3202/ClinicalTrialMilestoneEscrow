@@ -35,24 +35,26 @@ The contract was manually deployed and exercised on GenLayer Studionet
 (chain ID `61999`) at:
 
 ```text
-0x65629134FE9cc5f6BE2C8798467f5D1012e39634
+0xe619897700a801229ec3e1bb6f43c221dA91c28b
 ```
 
 The verified Studionet run used `0.01 GEN` escrow:
 
 ```text
-create_trial      0x7eb161f71bdbc3c574ed8dd9f4f9cfd3dbe6bfbdcec0406765e479a84a7576bc
-add_milestone     0x383b58de9a08dbdbb6af67de03662c0338ee5412689129b71c522fc7b83da825
-fund_milestone    0xa52036a2a7fcbc603b43e183c7cc8e48f5e6fc5e5403d6b0657c17d487ab712f
-submit_report     0x04629e1f367ca811554653523d7b2cbbc76ae0ae1210b79c59e3f58202893cef
-validate_report   0x5fb367617a14cd549d8313f798f664d14b6c0d9af968cdee1cf338a4a79ed1e6
-release_milestone 0x1b3f323fc8f910c7f92b905d658510c61e72fe1681ab680f2967d2c2f97ce2bb
+deployment        0x6126f09e8f8b31f57fc38029d8a4e2f1d0745f0cc0c2ef72fcdcbc7f4a78937e
+create_trial      0x74e0d6b7cea84915fad6b3c5524598833d337b567d4ae84bf4b8fbb05b2c9144
+add_milestone     0xe6e5b3f9d8ac609537c7a527453634b3ebd00e8f7389c1e7f5cad4718d6feaa3
+fund_milestone    0xac29e426f6abc5f277940f31d2e2d5d221cb72e19d07e29340d24a98289b0268
+submit_report     0xdef6477cd40e522ea48a62098bf3eafbe6638e997926b9c00ee574e637dd88bb
+validate_report   0x10f9c909d00ee89418532f1b1b230188affa024eb20214898cbd236a3b2411ac
+release_milestone 0xb26e0faeec340e6bab6d769f52dc1d0bdc351fb801756b8753f9dd826a402306
+recipient_transfer 0xdce93b15eb3e8d8ae933cf7dd3582c1c6f8a07726f89b8234a8ba3b312d67fdd
 ```
 
-All listed transactions reached `ACCEPTED`/`FINALIZED` with majority agreement.
-The final on-chain readback was `RELEASED`. This evidence proves the lifecycle
-and terminal state; it does not claim an independently recorded recipient
-balance delta unless that balance evidence is added to `docs/live-evidence/`.
+All listed transactions reached `FINALIZED` with majority agreement. The final
+on-chain state was `RELEASED`; Explorer showed the contract balance at `0 GEN`
+and a `0.01 GEN` transfer to the recorded milestone recipient. This evidence
+proves the lifecycle, terminal state, and recipient transfer.
 
 ## Studio deployment checklist
 

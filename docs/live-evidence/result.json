@@ -1,6 +1,6 @@
 {
-  "status": "PARTIALLY_VERIFIED",
-  "reason": "Latest deployment exercised through report validation and release submission; final release state and independent balance-delta evidence are still pending Explorer finalization/readback.",
+  "status": "VERIFIED_HAPPY_PATH",
+  "reason": "Latest deployment exercised through release; all lifecycle calls and the recipient transfer are FINALIZED. Explorer shows contract balance at 0 GEN after release.",
   "network": "studionet",
   "chain_id": 61999,
   "contract_address": "0xe619897700a801229ec3e1bb6f43c221dA91c28b",
@@ -15,6 +15,8 @@
     {"name": "fund_milestone", "tx": "0xac29e426f6abc5f277940f31d2e2d5d221cb72e19d07e29340d24a98289b0268", "status": "FINALIZED", "consensus": "MAJORITY_AGREE", "attached_value_wei": "10000000000000000"},
     {"name": "submit_report", "tx": "0xdef6477cd40e522ea48a62098bf3eafbe6638e997926b9c00ee574e637dd88bb", "status": "FINALIZED", "consensus": "MAJORITY_AGREE"},
     {"name": "validate_report", "tx": "0x10f9c909d00ee89418532f1b1b230188affa024eb20214898cbd236a3b2411ac", "status": "FINALIZED", "consensus": "MAJORITY_AGREE"},
-    {"name": "release_milestone", "tx": "0xb26e0faeec340e6bab6d769f52dc1d0bdc351fb801756b8753f9dd826a402306", "status": "ACCEPTED", "consensus": "MAJORITY_AGREE"}
-  ]
+    {"name": "release_milestone", "tx": "0xb26e0faeec340e6bab6d769f52dc1d0bdc351fb801756b8753f9dd826a402306", "status": "FINALIZED", "consensus": "MAJORITY_AGREE", "readback": "RELEASED"},
+    {"name": "recipient_transfer", "tx": "0xdce93b15eb3e8d8ae933cf7dd3582c1c6f8a07726f89b8234a8ba3b312d67fdd", "status": "FINALIZED", "value_wei": "10000000000000000", "to": "0xc67532aeF9D2879cBA9375a02E6217A3524657B8"}
+  ],
+  "balance_delta": {"contract_after_release": "0 GEN", "recipient_transfer_wei": "10000000000000000"}
 }
