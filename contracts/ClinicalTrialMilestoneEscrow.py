@@ -25,6 +25,7 @@ class ClinicalTrialMilestoneEscrow(gl.Contract):
     trial_budgets: TreeMap[u256, u256]
     trial_sponsor: TreeMap[u256, str]
     trial_lab: TreeMap[u256, str]
+    trial_delegate: TreeMap[u256, str]
     milestone_trial: TreeMap[u256, u256]
     milestone_names: TreeMap[u256, str]
     milestone_amounts: TreeMap[u256, u256]
@@ -54,6 +55,10 @@ class ClinicalTrialMilestoneEscrow(gl.Contract):
             return "INVALID_PHASE"
         if len(lab) == 0:
             return "INVALID_LAB"
+        try:
+            normalized_lab = str(Address(lab))
+        except Exception:
+            return "INVALID_LAB"
         if trial_key in self.trials:
             return "TRIAL_EXISTS"
         trial_id = self.trial_count
@@ -62,9 +67,24 @@ class ClinicalTrialMilestoneEscrow(gl.Contract):
         self.trial_phases[trial_id] = phase
         self.trial_budgets[trial_id] = budget
         self.trial_sponsor[trial_id] = str(gl.message.sender_address)
-        self.trial_lab[trial_id] = lab
+        self.trial_lab[trial_id] = normalized_lab
+        self.trial_delegate[trial_id] = ""
         self.trial_count = trial_id + u256(1)
         return trial_id
+
+    @gl.public.write
+    def set_trial_delegate(self, trial_id: u256, delegate: str) -> typing.Any:
+        if trial_id >= self.trial_count:
+            return "TRIAL_NOT_FOUND"
+        if self.trial_sponsor[trial_id] != str(gl.message.sender_address):
+            return "SPONSOR_ONLY"
+        if len(delegate) == 0:
+            return "INVALID_DELEGATE"
+        try:
+            self.trial_delegate[trial_id] = str(Address(delegate))
+        except Exception:
+            return "INVALID_DELEGATE"
+        return "DELEGATE_SET"
 
     @gl.public.write
     def add_milestone(self, trial_id: u256, name: str, amount: u256, recipient: str) -> typing.Any:
@@ -88,6 +108,7 @@ class ClinicalTrialMilestoneEscrow(gl.Contract):
         self.milestone_paid[milestone_id] = u256(0)
         self.milestone_recipient[milestone_id] = recipient
         self.escrow_received[milestone_id] = u256(0)
+        self.trial_budgets[trial_id] = self.trial_budgets[trial_id] - amount
         self.milestone_count = milestone_id + u256(1)
         return milestone_id
 
@@ -114,6 +135,10 @@ class ClinicalTrialMilestoneEscrow(gl.Contract):
     def submit_report(self, milestone_id: u256, report_uri: str, digest: str) -> typing.Any:
         if milestone_id >= self.milestone_count:
             return "MILESTONE_NOT_FOUND"
+        trial_id = self.milestone_trial[milestone_id]
+        sender = str(gl.message.sender_address)
+        if sender != self.trial_lab[trial_id] and sender != self.trial_delegate[trial_id]:
+            return "LAB_OR_DELEGATE_ONLY"
         if self.milestone_status[milestone_id] != "FUNDED":
             return "MILESTONE_NOT_PENDING"
         if len(report_uri) == 0 or len(report_uri) > 512 or not report_uri.startswith("ipfs://"):
@@ -195,15 +220,11 @@ class ClinicalTrialMilestoneEscrow(gl.Contract):
             return "MILESTONE_NOT_FOUND"
         if self.milestone_status[milestone_id] != "APPROVED":
             return "NOT_APPROVED"
-        trial_id = self.milestone_trial[milestone_id]
         amount = self.milestone_amounts[milestone_id]
         if self.milestone_paid[milestone_id] != u256(0):
             return "ALREADY_RELEASED"
         if self.escrow_received[milestone_id] != amount:
             return "INSUFFICIENT_ESCROW"
-        if self.trial_budgets[trial_id] < amount:
-            return "INSUFFICIENT_TRIAL_BUDGET"
-        self.trial_budgets[trial_id] = self.trial_budgets[trial_id] - amount
         self.milestone_paid[milestone_id] = amount
         self.milestone_status[milestone_id] = "RELEASED"
         _Recipient(Address(self.milestone_recipient[milestone_id])).emit_transfer(value=amount)
@@ -219,10 +240,12 @@ class ClinicalTrialMilestoneEscrow(gl.Contract):
         amount = self.escrow_received[milestone_id]
         if amount == u256(0) or self.milestone_paid[milestone_id] != u256(0):
             return "NOTHING_TO_REFUND"
+        trial_id = self.milestone_trial[milestone_id]
         self.escrow_received[milestone_id] = u256(0)
         self.milestone_paid[milestone_id] = amount
+        self.trial_budgets[trial_id] = self.trial_budgets[trial_id] + amount
         self.milestone_status[milestone_id] = "REFUNDED"
-        _Recipient(Address(self.deployer)).emit_transfer(value=amount)
+        _Recipient(Address(self.trial_sponsor[trial_id])).emit_transfer(value=amount)
         return "REFUNDED"
 
     @gl.public.view

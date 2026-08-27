@@ -29,7 +29,7 @@ def test_role_lifecycle_and_wrong_value(direct_vm, direct_deploy, direct_owner, 
     direct_vm.sender = direct_owner
     contract = direct_deploy(CONTRACT_PATH)
     direct_vm.sender = direct_owner
-    assert contract.create_trial("oncology-phase-ii-demo", "PHASE_II", 10**16, str(direct_alice)) == 0
+    assert contract.create_trial("oncology-phase-ii-demo", "PHASE_II", 10**16, _addr(direct_alice)) == 0
     assert contract.add_milestone(0, "interim-safety-review", 10**16, _addr(direct_alice)) == 0
     direct_vm.sender = direct_alice
     direct_vm.value = 1

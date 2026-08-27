@@ -24,3 +24,6 @@ def test_contract_uses_comparative_consensus_and_escrow_guards():
     assert "emit_transfer" in text
     assert "refund_milestone" in text
     assert "NOTHING_TO_REFUND" in text
+    assert "LAB_OR_DELEGATE_ONLY" in text
+    assert "set_trial_delegate" in text
+    assert "trial_sponsor" in text

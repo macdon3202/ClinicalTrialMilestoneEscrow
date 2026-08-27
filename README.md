@@ -1,7 +1,8 @@
 # ClinicalTrialMilestoneEscrow
 
 GenLayer Intelligent Contract for milestone-based clinical-trial compliance escrow.
-Labs submit an immutable, anonymized IPFS report for each milestone. Validators
+Only the registered lab address or an explicit sponsor-appointed delegate can
+submit an immutable, anonymized IPFS report for each milestone. Validators
 comparatively assess protocol compliance, sample-size evidence, adverse events, and
 safety risk before a milestone can be released.
 
@@ -11,7 +12,9 @@ safety risk before a milestone can be released.
 `release_milestone`
 
 Only approved reports with LOW or MEDIUM risk can release funds. Every report
-digest is single-use; invalid transitions return explicit error codes.
+digest is single-use; invalid transitions return explicit error codes. Milestone
+amounts reserve the trial budget when created, are consumed exactly once on
+release, and are returned to the recorded trial sponsor when a report is rejected.
 
 ## Local build
 
