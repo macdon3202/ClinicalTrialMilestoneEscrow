@@ -5,7 +5,7 @@
   "chain_id": 61999,
   "contract_address": "0xe619897700a801229ec3e1bb6f43c221dA91c28b",
   "contract_class": "ClinicalTrialMilestoneEscrow",
-  "commit_sha": "4ea3a40",
+  "commit_sha": "4ea3a407b8909c087f8a220cb9e2b83eadc6fd6c",
   "deployment_tx": "0x6126f09e8f8b31f57fc38029d8a4e2f1d0745f0cc0c2ef72fcdcbc7f4a78937e",
   "sdk_version": null,
   "runner_version": null,
